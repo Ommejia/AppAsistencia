@@ -1,0 +1,38 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Restablecer Contraseña</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="login-box">
+    <form [formGroup]="forrmularioPassRest">
+      <ion-item>
+        <ion-label position="floating">Usuario</ion-label>
+        <ion-input formControlName="nombre"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Nueva Contraseña</ion-label>
+        <ion-input type="password" formControlName="newpass"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Confirma Contraseña</ion-label>
+        <ion-input type="password" formControlName="checkpass"></ion-input>
+      </ion-item>
+      <ion-button shape="round" expand="full" class="passrest-button" (click)="guardar()">Recuperar</ion-button>
+    </form>
+  </div>
+    
+
+
+  
+
+
+
+
+
+
+
+  
+</ion-content>

@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Iniciar Sesion</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="login-page" class="ion-padding">
+  <div class="login-imagen_1">
+    <ion-img src="assets/images/undraw_female_avatar_efig.svg" class="login-imagen"></ion-img>
+  </div>
+  <div class="login-box">
+    <ion-item>
+      <ion-label position="floating">Usuario</ion-label>
+      <ion-input [(ngModel)]="modelousuario"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input type="password" [(ngModel)]="modelocontrasena"></ion-input>
+    </ion-item>
+
+    <ion-button shape="round" class="login-button" expand="full" (click)="validarcredencial()">Iniciar Sesión</ion-button>
+    <p style="font-size: 12px; color: aliceblue;"> 
+      ¿No recuerdas tu Contraseña?
+      <a [routerLink]="['/passrest']">Restablecer</a>
+    </p>
+  </div>
+</ion-content>
