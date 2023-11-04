@@ -19,6 +19,10 @@ const routes: Routes = [
     path: 'passrest',
     loadChildren: () => import('./pages/passrest/passrest.module').then( m => m.PassrestPageModule)
   },
+  {
+    path: 'crear-usuario',
+    loadChildren: () => import('./pages/crear-usuario/crear-usuario.module').then( m => m.CrearUsuarioPageModule)
+  },
 ];
 
 @NgModule({

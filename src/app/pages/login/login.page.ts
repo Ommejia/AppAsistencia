@@ -21,4 +21,7 @@ export class LoginPage {
     console.log(this.modelocontrasena);
     this.router.navigate(['/principal'])
   }
+  navegarCrearUsuario() {
+    this.router.navigate(['crear-usuario'])
+  }
 }
