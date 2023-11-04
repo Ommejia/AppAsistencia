@@ -18,5 +18,5 @@
   <ion-item class="ion-margin-top">
     <ion-input [(ngModel)]="mdl_apellido" label="Apellido" labelPlacement="floating" placeholder="Ingrese su Apellido"></ion-input>
   </ion-item>
-<ion-button class="degradado boton ion-margin-top" expand="block">Registrar Datos</ion-button>
+<ion-button (click)="almacenarUsuario()" class="degradado boton ion-margin-top" expand="block">Registrar Datos</ion-button>
 </ion-content>

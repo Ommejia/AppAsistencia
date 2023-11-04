@@ -19,6 +19,12 @@ mdl_apellido: string ='';
   }
 
 almacenarUsuario(){
-  this.login.almacenarUsuario
+  this.login.almacenarUsuario(
+    this.mdl_usuario,
+    this.mdl_contrasena,
+    this.mdl_correo,
+    this.mdl_nombre,
+    this.mdl_apellido
+  );
   }
 }
