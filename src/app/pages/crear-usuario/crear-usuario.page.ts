@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-crear-usuario',
@@ -11,9 +12,13 @@ mdl_contrasena: string ='';
 mdl_correo: string ='';
 mdl_nombre: string ='';
 mdl_apellido: string ='';
-  constructor() { }
+
+  constructor(private login:LoginService) { }
 
   ngOnInit() {
   }
 
+almacenarUsuario(){
+  this.login.almacenarUsuario
+  }
 }

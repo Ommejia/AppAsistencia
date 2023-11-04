@@ -25,4 +25,16 @@ export class LoginService {
       })
       .catch(e => console.log('FSR: ERROR CREAR O ABRIR DB'));
   }
+  almacenarUsuario(usuario: string, contrasena: string, correo:string, nombre: string, apellido: string){
+    this.sqlite.create({
+      name: 'data.db',
+      location: 'default'
+    })
+      .then((db: SQLiteObject) => {
+        db.executeSql('INSERT INTO PERSONA VALUES(?, ?, ?, ?, ?)', [usuario, contrasena, correo, nombre, apellido])
+          .then(() => console.log('FSR: PERSONA ALMACENADA OK'))
+          .catch(e => console.log('FSR: ERROR ALMACENAR PERSONA ' + JSON.stringify(e)));
+      })
+      .catch(e => console.log('FSR: ERROR CREAR O ABRIR DB'));
+  }
 }
