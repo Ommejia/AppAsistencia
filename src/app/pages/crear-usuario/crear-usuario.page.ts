@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
@@ -13,7 +14,7 @@ mdl_correo: string ='';
 mdl_nombre: string ='';
 mdl_apellido: string ='';
 
-  constructor(private login:LoginService) { }
+  constructor(private login:LoginService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -26,5 +27,7 @@ almacenarUsuario(){
     this.mdl_nombre,
     this.mdl_apellido
   );
+  
+  this.router.navigate(['login']);
   }
 }
