@@ -53,4 +53,24 @@ export class LoginService {
       })
       .catch(e => console.log('FSR: ERROR CREAR O ABRIR DB'));
   }
+  infoUsuario(usuario: string, contrasena: string ){
+    return this.sqlite.create({
+      name: 'data.db',
+      location: 'default'
+    })
+      .then((db: SQLiteObject) => {
+        return db.executeSql('SELECT CORREO, NOMBRE, APELLIDO FROM PERSONA WHERE USUARIO = ? AND CONTRASENA = ?', [usuario, contrasena])
+          .then((data) => {
+            let objeto: any = {} ;
+            objeto.nombre = data.rows.item(0).nombre;
+            objeto.correo = data.rows.item(0).correo;
+            objeto.apellido = data.rows.item(0).apellido;
+
+		        return objeto; 
+	        })
+
+          .catch(e => console.log('FSR: ERROR OBTENER INFORMACION USUARIO ' + JSON.stringify(e)));
+      })
+      .catch(e => console.log('FSR: ERROR CREAR O ABRIR DB'));
+  }
 }

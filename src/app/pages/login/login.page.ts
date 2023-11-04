@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
@@ -15,10 +15,17 @@ export class LoginPage {
   constructor(private navCtrl: NavController,public router: Router, private loginservice: LoginService) {}
 
   login() {
+    let extras: NavigationExtras = {
+      replaceUrl: true,
+      state: {
+        usuario: this.modelousuario,
+        contrasena: this.modelocontrasena
+      }
+    }
     this.loginservice.loginUsuario(this.modelousuario, this.modelocontrasena)
       .then(data => {
         if (data == 1){
-          this.router.navigate(['principal']);
+          this.router.navigate(['principal'], extras);
         } else {
           console.log('FSR: Credenciales incorrectas');
         }
