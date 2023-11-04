@@ -15,6 +15,15 @@ export class LoginPage {
   constructor(private navCtrl: NavController,public router: Router, private loginservice: LoginService) {}
 
   login() {
+    this.loginservice.loginUsuario(this.modelousuario, this.modelocontrasena)
+      .then(data => {
+        if (data == 1){
+          this.router.navigate(['principal']);
+        } else {
+          console.log('FSR: Credenciales incorrectas');
+        }
+
+      })
   }
   validarcredencial() {
     console.log(this.modelousuario);
@@ -24,4 +33,5 @@ export class LoginPage {
   navegarCrearUsuario() {
     this.router.navigate(['crear-usuario'])
   }
+
 }
