@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormControl, Validators,FormBuilder } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-passrest',
@@ -9,61 +10,58 @@ import { Router } from '@angular/router';
   styleUrls: ['./passrest.page.scss'],
 })
 export class PassrestPage implements OnInit {
+  usuario: string = '';
+  contrasena: string = '';
+
 
   forrmularioPassRest: FormGroup;
   
-  constructor(public fb: FormBuilder, public alertController: AlertController, public router: Router) {
+  constructor(public fb: FormBuilder, public alertController: AlertController, public router: Router, private loginservice: LoginService ) {
     this.forrmularioPassRest = this.fb.group({
-      'nombre':     new FormControl("",[Validators.required,Validators.pattern(/^[a-zA-Z\s]*$/)]),
-      'newpass':    new FormControl("",Validators.required),
-      'checkpass':  new FormControl("",Validators.required)
+      'mdl_actual': new FormControl("",Validators.required),
+      'mdl_nueva':    new FormControl("",Validators.required),
+      'mdl_confirmacion':  new FormControl("",Validators.required)
     })
    }
 
-  ngOnInit() {
-  }
-
-  /*VALIDACION*/
-  async guardar(){
-    var form = this.forrmularioPassRest.value;
-
-
-    /*Validacion Datos en Campos Validos*/
-    if(this.forrmularioPassRest.invalid){
-      const alert = await this.alertController.create({
-        header:   'Datos Incompletos',
-        message:  'Tienes que llenar todos los datos!',
-        buttons:  ['Aceptar']
-      });
-  
-      await alert.present();
-      return;
-    }/*Validacion Confirmacion Contraseñas*/
-    if(form.newpass !== form.checkpass){
-      const alert = await this.alertController.create({
-        header:   'Datos Incorrectos',
-        message:  'Favor de ingresar contraseña que coincidan!!',
-        buttons:  ['Aceptar']
-      });
-  
-      await alert.present();
-      return;
-    }else{
-      const alert = await this.alertController.create({
-        header:   'Contraseña Restablecida',
-        message:  'Datos Restablecidos Exitosamente!!',
-        buttons:  [{
-          text:'Aceptar',
-          handler: () => { this.router.navigate(['/principal'])}
-        }]
-      });
-      await alert.present();
+   ngOnInit() {
+    let extras = this.router.getCurrentNavigation();
+    if (extras?.extras.state) {
+      this.usuario = extras?.extras.state['usuario'];
+      this.contrasena = extras?.extras.state['contrasena'];
     }
-
-
-    console.log("USUARIO:", form.nombre);
-    console.log("NUEVA CONTRASEÑA:",form.newpass);
-    console.log('guardado :D');
   }
 
+  /* VALIDACION Y CAMBIO DE CONTRASEÑA */
+  async cambiarContrasena() {
+    if (this.forrmularioPassRest.invalid) {
+      const alert = await this.alertController.create({
+        header: 'Datos Incompletos',
+        message: 'Tienes que llenar todos los datos!',
+        buttons: ['Aceptar']
+      });
+
+      await alert.present();
+    } else {
+      try {
+        this.loginservice.cambiarContrasena(this.usuario, this.contrasena, this.forrmularioPassRest.value.mdl_nueva);
+        const alert = await this.alertController.create({
+          header: 'Contraseña Restablecida',
+          message: 'Datos Restablecidos Exitosamente!!',
+          buttons: [{
+            text: 'Aceptar',
+            handler: () => { this.router.navigate(['/principal']) }
+          }]
+        });
+        await alert.present();
+      } catch (error) {
+        const alert = await this.alertController.create({
+          header: 'Error al Cambiar Contraseña',
+          message: 'Hubo un problema al cambiar la contraseña.',
+          buttons: ['Aceptar']
+        });
+        await alert.present();
+      }
+    }
+  }
 }

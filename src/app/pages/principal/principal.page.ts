@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { LoginService } from 'src/app/services/login.service';
 
@@ -28,6 +28,12 @@ export class PrincipalPage implements OnInit {
     this.infoUsuario();
   }
   navegarAPassRest() {
+    let extras: NavigationExtras = {
+      state: {
+        usuario: this.usuario,
+        contrasena: this.contrasena
+      }
+    }
     this.router.navigate(['/passrest']);
   }
   onClick(){

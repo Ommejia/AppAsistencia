@@ -73,4 +73,17 @@ export class LoginService {
       })
       .catch(e => console.log('FSR: ERROR CREAR O ABRIR DB'));
   }
+  cambiarContrasena(usuario: string, contrasenaActual: string, contrasenaNueva: string){
+    this.sqlite.create({
+      name: 'data.db',
+      location: 'default'
+    })
+      .then((db: SQLiteObject) => {
+        db.executeSql('UPDATE PERSONA SET CONTRASENA = ? WHERE USUARIO = ? AND CONTRASENA = ?', [contrasenaNueva, usuario, contrasenaActual])
+          .then(() => console.log('FSR: CONTRASENA ALMACENADA OK'))
+          .catch(e => console.log('FSR: ERROR ALMACENAR PERSONA ' + JSON.stringify(e)));
+      })
+      .catch(e => console.log('FSR: ERROR CREAR O ABRIR DB'));
+  }
+
 }

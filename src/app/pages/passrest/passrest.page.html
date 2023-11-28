@@ -10,18 +10,18 @@
   <div class="login-box">
     <form [formGroup]="forrmularioPassRest">
       <ion-item>
-        <ion-label position="floating">Usuario</ion-label>
-        <ion-input formControlName="nombre"></ion-input>
+        <ion-label position="floating">Ingrese Contraseña Actual</ion-label>
+        <ion-input formControlName="mdl_actual"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Nueva Contraseña</ion-label>
-        <ion-input type="password" formControlName="newpass"></ion-input>
+        <ion-label position="floating">Ingrese Contraseña Nueva</ion-label>
+        <ion-input formControlName="mdl_nueva"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Confirma Contraseña</ion-label>
-        <ion-input type="password" formControlName="checkpass"></ion-input>
+        <ion-label position="floating">Confirme Contraseña Nueva</ion-label>
+        <ion-input formControlName="mdl_confirmacion"></ion-input>
       </ion-item>
-      <ion-button shape="round" expand="full" class="passrest-button" (click)="guardar()">Recuperar</ion-button>
+      <ion-button (click)="cambiarContrasena()" shape="round" expand="full" class="passrest-button">Cambiar Contraseña</ion-button>
     </form>
   </div>
     
